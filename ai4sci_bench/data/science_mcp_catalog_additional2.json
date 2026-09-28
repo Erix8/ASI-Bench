@@ -851,27 +851,42 @@
   },
   "rhino3d": {
     "category": "cad-cam",
-    "source": "https://github.com/jingcheng-chen/rhinomcp",
+    "source": "https://github.com/EaseHee/rhino-mcp",
     "server": {
-      "command": "/path/to/rhinomcp/.venv/bin/rhinomcp",
-      "args": [],
-      "cwd": "/path/to/rhinomcp",
+      "command": "uvx",
+      "args": [
+        "--python",
+        "3.12",
+        "--with",
+        "mcp==1.30.0",
+        "--with",
+        "rhino3dm==8.17.0",
+        "--from",
+        "rhino3dm-mcp==0.6.0",
+        "rhino3dm-mcp"
+      ],
       "env": {
-        "RHINO_MCP_HOST": "127.0.0.1",
-        "RHINO_MCP_PORT": "1999"
+        "RHINO_MCP_FORCE_MODE": "standalone",
+        "RHINO_MCP_TRANSPORT": "stdio",
+        "RHINO_MCP_LOG_LEVEL": "INFO"
       }
     }
   },
   "grasshopper": {
     "category": "cad-cam",
-    "source": "https://github.com/veoery/GH_mcp_server",
+    "source": "https://github.com/bcshih/hoger",
     "server": {
-      "command": "/path/to/GH_mcp_server/.venv/bin/grasshopper-mcp",
-      "args": [],
-      "cwd": "/path/to/GH_mcp_server",
+      "command": "/path/to/hoger/.venv/bin/python",
+      "args": [
+        "-m",
+        "hoger.mcp_server.stdio_main"
+      ],
+      "cwd": "/path/to/hoger",
       "env": {
-        "USE_RHINO3DM": "true",
-        "USE_COMPUTE_API": "false"
+        "HOGER_COMPUTE_URL": "http://127.0.0.1:5000",
+        "HOGER_TOOLS_DIR": "/path/to/hoger/tools",
+        "HOGER_RESULTS_DIR": "/path/to/hoger/generated/results",
+        "HOGER_GH_DIR": "/path/to/hoger/gh_files"
       }
     }
   },
@@ -1566,11 +1581,14 @@
   },
   "opticstudio": {
     "category": "electromagnetics-optics",
-    "source": "https://github.com/jaruiz6363/OpticStudioMCPServer",
+    "source": "https://github.com/webworn/zemax-mcp-server",
     "server": {
-      "command": "C:\\path\\to\\OpticStudioMCPServer\\src\\ZemaxMCP.Server\\bin\\Release\\net48\\ZemaxMCP.Server.exe",
-      "args": [],
-      "cwd": "C:\\path\\to\\OpticStudioMCPServer\\src\\ZemaxMCP.Server\\bin\\Release\\net48"
+      "command": "/path/to/zemax-mcp-server/.venv/bin/python",
+      "args": [
+        "-m",
+        "zemax_mcp.server"
+      ],
+      "cwd": "/path/to/zemax-mcp-server"
     }
   },
   "zemax": {
@@ -3178,10 +3196,17 @@
   },
   "vasp": {
     "category": "materials-databases",
-    "source": "https://github.com/JiaxuanLiu-Arsko/VASPilot",
+    "source": "https://github.com/The66user/dft-autopilot-mcp",
     "server": {
-      "type": "http",
-      "url": "http://127.0.0.1:8933/mcp"
+      "command": "node",
+      "args": [
+        "/path/to/dft-autopilot-mcp/server/dist/mcp-server.js"
+      ],
+      "cwd": "/path/to/dft-autopilot-mcp/server",
+      "env": {
+        "QE_WORK_DIR": "/path/to/vasp-workspace",
+        "COMPUTE_PROVIDER": "scnet"
+      }
     }
   },
   "abinit": {
@@ -3977,38 +4002,35 @@
   },
   "bwa": {
     "category": "bioinformatics",
-    "source": "https://github.com/bio-mcp/bio-mcp-bwa",
+    "source": "https://github.com/florensiawidjaja/BioinfoMCP",
     "server": {
-      "command": "/path/to/bio-mcp-bwa/.venv/bin/python",
+      "command": "/path/to/BioinfoMCP/.venv/bin/python",
       "args": [
-        "-m",
-        "src.server"
+        "mcp-servers/mcp_bwa/app/bwa_server.py"
       ],
-      "cwd": "/path/to/bio-mcp-bwa"
+      "cwd": "/path/to/BioinfoMCP"
     }
   },
   "samtools": {
     "category": "bioinformatics",
-    "source": "https://github.com/bio-mcp/bio-mcp-samtools",
+    "source": "https://github.com/florensiawidjaja/BioinfoMCP",
     "server": {
-      "command": "/path/to/bio-mcp-samtools/.venv/bin/python",
+      "command": "/path/to/BioinfoMCP/.venv/bin/python",
       "args": [
-        "-m",
-        "src.server"
+        "mcp-servers/mcp_samtools/app/samtools_server.py"
       ],
-      "cwd": "/path/to/bio-mcp-samtools"
+      "cwd": "/path/to/BioinfoMCP"
     }
   },
   "bcftools": {
     "category": "bioinformatics",
-    "source": "https://github.com/bio-mcp/bio-mcp-bcftools",
+    "source": "https://github.com/florensiawidjaja/BioinfoMCP",
     "server": {
-      "command": "/path/to/bio-mcp-bcftools/bio-mcp-bcftools/.venv/bin/python",
+      "command": "/path/to/BioinfoMCP/.venv/bin/python",
       "args": [
-        "-m",
-        "src.server"
+        "mcp-servers/mcp_bcftools/app/bcftools_server.py"
       ],
-      "cwd": "/path/to/bio-mcp-bcftools/bio-mcp-bcftools"
+      "cwd": "/path/to/BioinfoMCP"
     }
   },
   "gatk": {
@@ -4168,18 +4190,14 @@
   },
   "hamilton_venus": {
     "category": "lab-automation",
-    "source": "https://github.com/BirdBare/mcp-py-venus-step",
+    "source": "https://github.com/di-omics/plr-mcp",
     "server": {
-      "command": "/path/to/mcp-py-venus-step/.venv/bin/python",
-      "args": [
-        "-m",
-        "mcp_py_venus_step.channel_1000ul.aspirate_liquid"
-      ],
-      "cwd": "/path/to/mcp-py-venus-step",
+      "command": "/path/to/plr-mcp/.venv/bin/plr-mcp",
+      "args": [],
+      "cwd": "/path/to/plr-mcp",
       "env": {
-        "MCP_TRANSPORT": "stdio",
-        "VENUS_EXECUTOR_PORT": "57000",
-        "PYTHON_DOTENV_DISABLED": "1"
+        "PLR_MCP_BACKEND": "chatterbox",
+        "PLR_MCP_SIMULATE": "1"
       }
     }
   },
@@ -4615,14 +4633,16 @@
   },
   "latex": {
     "category": "research-data",
-    "source": "https://github.com/Yeok-c/latex-mcp-server",
+    "source": "https://github.com/RobertoDure/mcp-latex-server",
     "server": {
-      "command": "/path/to/latex-mcp-server/.venv/bin/latex-mcp-server",
+      "command": "/path/to/mcp-latex-server/.venv/bin/python",
       "args": [
-        "--workspace",
-        "/path/to/latex-workspace"
+        "latex_server.py"
       ],
-      "cwd": "/path/to/latex-mcp-server"
+      "cwd": "/path/to/mcp-latex-server",
+      "env": {
+        "LATEX_SERVER_BASE_PATH": "/path/to/latex-workspace"
+      }
     }
   },
   "pandoc": {
@@ -4763,17 +4783,10 @@
   },
   "kaggle": {
     "category": "research-data",
-    "source": "https://github.com/arrismo/kaggle-mcp",
+    "source": "https://www.kaggle.com/docs/mcp",
     "server": {
-      "command": "/path/to/kaggle-mcp/.venv/bin/python",
-      "args": [
-        "src/server.py"
-      ],
-      "cwd": "/path/to/kaggle-mcp",
-      "env": {
-        "KAGGLE_USERNAME": "YOUR_KAGGLE_USERNAME",
-        "KAGGLE_KEY": "YOUR_KAGGLE_API_KEY"
-      }
+      "type": "http",
+      "url": "https://www.kaggle.com/mcp"
     }
   },
   "slurm": {

@@ -112,15 +112,16 @@
   },
   "genesis": {
     "category": "robotics",
-    "source": "https://github.com/1douya1/genesis-mcp-robotics",
+    "source": "https://github.com/lyuai/genesis-mcp",
     "server": {
-      "command": "/path/to/genesis-mcp-robotics/.venv/bin/python",
+      "command": "/path/to/genesis-mcp/.venv/bin/python",
       "args": [
-        "/path/to/genesis-mcp-robotics/mcp_server/simple_genesis_mcp.py"
+        "/path/to/genesis-mcp/server.py"
       ],
-      "cwd": "/path/to/genesis-mcp-robotics/mcp_server",
+      "cwd": "/path/to/genesis-mcp",
       "env": {
-        "GENESIS_ASSET_DIR": "/path/to/genesis-mcp-robotics/assets/objects"
+        "MCP_TRANSPORT": "stdio",
+        "PYTHONUNBUFFERED": "1"
       }
     }
   },
